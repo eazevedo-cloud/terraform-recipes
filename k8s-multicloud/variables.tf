@@ -1,19 +1,12 @@
-variable "enable_alibaba" {
-  description = "Enable / Disable Alibaba"
-  type        = bool
-  default     = false
+module "modules" {
+  source  = "eazevedo-cloud/modules/k8s"
+  version = "1.0.4"
 }
 
 variable "enable_amazon" {
   description = "Enable / Disable Amazon"
   type        = bool
-  default     = false
-}
-
-variable "enable_digitalocean" {
-  description = "Enable / Disable DigitalOcean"
-  type        = bool
-  default     = false
+  default     = true
 }
 
 variable "enable_google" {
@@ -43,35 +36,12 @@ variable "nodes" {
 }
 
 
-## Alibaba Cloud
-variable "ali_access_key" {
-  description = "Alibaba Cloud AccessKey ID"
-  type        = string
-  default     = ""
-}
-
-variable "ali_secret_key" {
-  description = "Alibaba Cloud Access Key Secret"
-  type        = string
-  default     = ""
-}
-
-
 ### Amazon
 variable "aws_profile" {
   description = "AWS cli profile (e.g. `default`)"
   type        = string
   default     = "default"
 }
-
-
-## Digital Ocean
-variable "do_token" {
-  description = "Digital Ocean personal access (API) token"
-  type        = string
-  default     = ""
-}
-
 
 ## Google Cloud
 variable "gcp_project" {

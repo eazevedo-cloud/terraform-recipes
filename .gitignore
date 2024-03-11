@@ -1,2 +1,4 @@
 
 .DS_Store
+k8s-multicloud/.terraform.lock.hcl
+/k8s-multicloud/.terraform
