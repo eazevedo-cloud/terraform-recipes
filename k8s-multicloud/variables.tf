@@ -1,8 +1,3 @@
-module "modules" {
-  source  = "eazevedo-cloud/modules/k8s"
-  version = "1.0.4"
-}
-
 variable "enable_amazon" {
   description = "Enable / Disable Amazon"
   type        = bool

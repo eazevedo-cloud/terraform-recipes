@@ -1,4 +1,7 @@
 ## Amazon Web Services (EKS)
+module "amazon" {
+  source  = "eazevedo-cloud/madeinweb/aws"
+  version = "1.0.3"
 
   enable_amazon = var.enable_amazon
 
@@ -6,8 +9,8 @@
 
 ## Google Cloud Platform (GKE)
 module "google" {
-  source  = "eazevedo-cloud/modules/k8s"
-  version = "1.0.4"
+  source  = "eazevedo-cloud/madeinweb/google"
+  version = "1.1.1"
 
   enable_google = var.enable_google
 
@@ -18,8 +21,8 @@ module "google" {
 
 ## Microsoft Azure (AKS)
 module "microsoft" {
-  source  = "eazevedo-cloud/modules/k8s"
-  version = "1.0.4"
+  source  = "eazevedo-cloud/madeinweb/azure"
+  version = "1.2.1"
 
   enable_microsoft = var.enable_microsoft
 
