@@ -1,0 +1,58 @@
+# values.yaml
+customConfiguration:
+  enabled: true
+  configuration: |
+    global
+      daemon
+      maxconn 4096
+        
+    defaults
+      mode tcp
+      timeout connect 10s
+      timeout client 30s
+      timeout server 30s
+        
+    frontend proxy_frontend
+      bind *:5020 accept-proxy
+      mode tcp
+        
+      acl is_client_a src 192.168.0.1
+      acl is_client_b src 192.168.0.2
+        
+      use_backend socket_server if is_client_a
+      use_backend socket_server_b if is_client_b
+      default_backend socket_server
+        
+    backend socket_server
+      mode tcp
+      server server_a socket-server.socket-server:5020 check
+        
+    backend socket_server_b
+      mode tcp
+      server server_b socket-server-b.socket-server-b:5020 check
+
+service:
+  ports:
+  - name: proxy
+    port: 5020
+    protocol: TCP
+  type: ClusterIP
+
+daemonset:
+  hostNetwork: false
+  terminationGracePeriodSeconds: 60
+
+securityContext:
+  enabled: true
+  runAsUser: 1000
+  runAsGroup: 1000
+
+initContainers:
+  - name: sysctl
+    image: "busybox:musl"
+    command:
+      - /bin/sh
+      - -c
+      - sysctl -w net.ipv4.ip_unprivileged_port_start=0
+    securityContext:
+      privileged: true
