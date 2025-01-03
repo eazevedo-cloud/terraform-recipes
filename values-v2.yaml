@@ -1,15 +1,15 @@
 # values.yaml
 containerPorts:
-  - name: proxy
-    containerPort: 5020
+  - name: "proxy"
+    containerPort: "5020"
     protocol: TCP
 
 service:
   type: ClusterIP
   ports:
-    - name: proxy
-      port: 5020
-      targetPort: 5020
+    - name: "proxy"
+      port: "5020"
+      targetPort: "5020"
       protocol: TCP
 
 securityContext:
